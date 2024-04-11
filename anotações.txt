@@ -1,0 +1,15 @@
+    // usando o id
+    // await page.fill('#newTask', 'Comprar chocolate')
+
+    // usando o input
+    // await page.fill('input[placeholder="Add a new task"]', 'Comprar chocolate')
+
+    // usando a classe mas que o código pode mudar a cada nova build
+    // await page.fill('._listInputNewTask_1y0mp_21', 'Comprar chocolate')
+
+    // usando a classe
+    // await page.fill('input[class*=InputNewTask]', 'Comprar chocolate') aula 15 e 16
+    // await inputTaskName.press('button[class*=ButtonNewTask]')
+
+    // usando xpath
+    // await page.click('xpath=button[contains(text(),"Create")]')
