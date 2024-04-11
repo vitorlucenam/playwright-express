@@ -1,10 +1,13 @@
 import { test, expect } from '@playwright/test'
-import { TaskModel } from './fixtures/task.model';
+
+import { TaskModel } from './fixtures/task.model'
+import { deleteTaskByHelper, postTask } from './support/helpers';
+
 test('Cadastrar uma nova tarefa', async ({ page, request }) => {
 
-    const task: TaskModel = { name: "Comprar o curso do papito", is_done: false}
+    const task: TaskModel = { name: "Comprar o curso do papito", is_done: false }
 
-    await request.delete('http://localhost:3333/helper/tasks/' + task.name)
+    await deleteTaskByHelper(request, task.name)
 
     await page.goto('http://127.0.0.1:8080')
 
@@ -23,10 +26,8 @@ test('Não deve permitir cadastrar tarefa repetida', async ({ page, request }) =
     const task: TaskModel = { name: "Estudar Playwright", is_done: false }
 
     // Chamadas na API para: Fazer o reset da massa, realizar o cadastro, verificar se o status recebido foi true
-    await request.delete('http://localhost:3333/helper/tasks/' + task.name)
-
-    const newTask = await request.post('http://localhost:3333/tasks', { data: task })
-    expect(newTask.ok()).toBeTruthy();
+    await deleteTaskByHelper(request, task.name)
+    await postTask(request, task)
 
     // Teste em si
     await page.goto('http://127.0.0.1:8080')
