@@ -4,9 +4,10 @@ import { TaskModel } from './fixtures/task.model'
 import { deleteTaskByHelper, postTask } from './support/helpers'
 import { TasksPage } from './pages/tasks'
 
+import data from './fixtures/tasks.json'
 test('Cadastrar uma nova tarefa', async ({ page, request }) => {
     // Masa de teste
-    const task: TaskModel = { name: "Comprar o curso do papito", is_done: false }
+    const task = data.sucess as TaskModel
 
     // Chamadas na API
     await deleteTaskByHelper(request, task.name)
@@ -21,8 +22,7 @@ test('Cadastrar uma nova tarefa', async ({ page, request }) => {
 
 test('Não deve permitir cadastrar tarefa repetida', async ({ page, request }) => {
     // Masa de teste
-    const task: TaskModel = { name: "Estudar Playwright", is_done: false }
-
+    const task = data.duplicate as TaskModel
     // Chamadas na API
     await deleteTaskByHelper(request, task.name)
     await postTask(request, task)
@@ -37,7 +37,7 @@ test('Não deve permitir cadastrar tarefa repetida', async ({ page, request }) =
 
 test   ('Não deve permitir criar tarefa vazia', async ({ page }) => {
     // Masa de teste
-    const task: TaskModel = { name: "", is_done: false }
+    const task = data.required as TaskModel
 
     // Cenário de teste
     const tasksPage: TasksPage = new TasksPage(page)

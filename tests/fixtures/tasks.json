@@ -1,0 +1,12 @@
+{
+    "sucess": {
+        "name": "Finalizar o curso de Playwright", "is_done": false
+    },
+    "duplicate": {
+        "name": "Fazer versionamento no git", "is_done": false
+    },
+    "required": {
+        "name": "", "is_done": false
+    }
+
+}
