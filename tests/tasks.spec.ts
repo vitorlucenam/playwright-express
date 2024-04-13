@@ -71,8 +71,6 @@ test.describe('Atualização', ()=>{
 
         // Assert
         await tasksPage.shoulBeDone(task.name)
-
-
     });
 });
 
