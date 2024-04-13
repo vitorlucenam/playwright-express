@@ -12,11 +12,11 @@
         "is_done": false
     },
     "update": {
-        "name": "Concluir o estudo de playwright",
+        "name": "Comprar uma garrafa nova",
         "is_done": false
     },
     "delete": {
-        "name": "Estudar ",
+        "name": "Tirar a roupa do varal ",
         "is_done": false
     }
 }
