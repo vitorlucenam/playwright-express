@@ -1,12 +1,18 @@
 {
     "sucess": {
-        "name": "Finalizar o curso de Playwright", "is_done": false
+        "name": "Finalizar o curso de Playwright",
+        "is_done": false
     },
     "duplicate": {
-        "name": "Fazer versionamento no git", "is_done": false
+        "name": "Fazer versionamento no git",
+        "is_done": false
     },
     "required": {
-        "name": "", "is_done": false
+        "name": "",
+        "is_done": false
+    },
+    "update": {
+        "name": "Concluir o estudo de playwright",
+        "is_done": false
     }
-
 }

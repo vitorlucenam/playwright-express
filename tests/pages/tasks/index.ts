@@ -10,6 +10,7 @@ export class TasksPage {
         this.inputTaskName = page.locator('input[class*=InputNewTask]')
     }
 
+    // Funções de ação
     async go() {
         await this.page.goto('http://127.0.0.1:8080')
     }
@@ -20,6 +21,12 @@ export class TasksPage {
 
     }
 
+    async toggle(taskName: string) {
+        const target = this.page.locator(`xpath=//p[text()="${taskName}"]/..//button[contains(@class, "Toggle")]`)
+        await target.click()
+    }
+
+    // Funções de validação
     async shouldHaveText(taskName: string) {
         const target = this.page.locator(`css=.task-item p >> text=${taskName}`)
         await expect(target).toBeVisible()
@@ -30,4 +37,10 @@ export class TasksPage {
         const target = this.page.locator('.swal2-html-container')
         await expect(target).toHaveText(text)
     }
+    
+    async shoulBeDone(taskName: string) {
+        const target = this.page.getByText(taskName)
+        await  expect(target).toHaveCSS('text-decoration-line', 'line-through')
+    }
+
 }
