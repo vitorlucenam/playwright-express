@@ -6,16 +6,19 @@ import { TasksPage } from './pages/tasks'
 
 import data from './fixtures/tasks.json'
 
+let tasksPage: TasksPage
+
+test.beforeEach(({ page }) => {
+    tasksPage = new TasksPage(page)
+});
+
 test.describe('Cadastro de task', () => {
-    test('Cadastrar uma nova tarefa', async ({ page, request }) => {
+    test('Cadastrar uma nova tarefa', async ({ request }) => {
         // Massa de teste
         const task = data.sucess as TaskModel
 
         // Chamadas na API
         await deleteTaskByHelper(request, task.name)
-
-        // Instanciando o page object
-        const tasksPage: TasksPage = new TasksPage(page)
         
         // Cenário de teste
         await tasksPage.go()
@@ -24,16 +27,13 @@ test.describe('Cadastro de task', () => {
 
     });
 
-    test('Não deve permitir cadastrar tarefa repetida', async ({ page, request }) => {
+    test('Não deve permitir cadastrar tarefa repetida', async ({ request }) => {
         // Massa de teste
         const task = data.duplicate as TaskModel
 
         // Chamadas na API 
         await deleteTaskByHelper(request, task.name)
         await postTask(request, task)
-
-        // Instanciando o page object
-        const tasksPage: TasksPage = new TasksPage(page)
 
         // Cenário de teste
         await tasksPage.go()
@@ -42,12 +42,9 @@ test.describe('Cadastro de task', () => {
 
     });
 
-    test('Não deve permitir criar tarefa vazia', async ({ page }) => {
+    test('Não deve permitir criar tarefa vazia', async () => {
         // Massa de teste
         const task = data.required as TaskModel
-
-        // Instanciando o page object
-        const tasksPage: TasksPage = new TasksPage(page)
 
         // Cenário de teste
         await tasksPage.go()
@@ -60,16 +57,13 @@ test.describe('Cadastro de task', () => {
 });
 
 test.describe('Atualização', ()=>{
-    test('Deve conseguir concluir uma tarefa', async ({ page, request }) => {
+    test('Deve conseguir concluir uma tarefa', async ({ request }) => {
         // Massa de teste
         const task = data.update as TaskModel
 
         // Chamada na API para excluir e adicionar a tarefa
         await deleteTaskByHelper(request, task.name)
         await postTask(request, task)
-
-        // Instanciando o page object
-        const tasksPage: TasksPage = new TasksPage(page)
 
         // Cenário
         await tasksPage.go()
@@ -83,16 +77,13 @@ test.describe('Atualização', ()=>{
 });
 
 test.describe('Exclusão', ()=>{
-    test('Deve conseguir excluir uma tarefa', async ({ page, request }) => {
+    test('Deve conseguir excluir uma tarefa', async ({ request }) => {
         // Massa de teste
         const task = data.update as TaskModel
 
         // Chamada na API para excluir e adicionar a tarefa
         await deleteTaskByHelper(request, task.name)
         await postTask(request, task)
-
-        // Instanciando o page object
-        const tasksPage: TasksPage = new TasksPage(page)
 
         // Cenário
         await tasksPage.go()
