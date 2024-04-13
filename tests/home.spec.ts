@@ -1,6 +1,15 @@
-import {test, expect} from '@playwright/test'
+import { expect, test } from '@playwright/test'
+
+import { TaskModel } from './fixtures/task.model'
+import { TasksPage } from './pages/tasks'
+
+let tasksPage: TasksPage
+
+test.beforeEach(({ page }) => {
+    tasksPage = new TasksPage(page)
+});
 
 test('Webapp deve estar online', async ({page}) => {
-    await page.goto('http://127.0.0.1:8080')
+    await tasksPage.go()
     await expect(page).toHaveTitle('Gerencie suas tarefas com Mark L')
 });
