@@ -26,10 +26,21 @@ export class TasksPage {
         await target.click()
     }
 
+    async remove(taskName: string) {
+        const target = this.page.locator(`xpath=//p[text()="${taskName}"]/..//button[contains(@class, "Delete")]`)
+        await target.click()
+    }
+
     // Funções de validação
     async shouldHaveText(taskName: string) {
         const target = this.page.locator(`css=.task-item p >> text=${taskName}`)
         await expect(target).toBeVisible()
+
+    }
+
+    async shouldNotExist(taskName: string) {
+        const target = this.page.locator(`css=.task-item p >> text=${taskName}`)
+        await expect(target).not.toBeVisible()
 
     }
 

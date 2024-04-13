@@ -81,3 +81,26 @@ test.describe('Atualização', ()=>{
 
     });
 });
+
+test.describe('Exclusão', ()=>{
+    test('Deve conseguir excluir uma tarefa', async ({ page, request }) => {
+        // Massa de teste
+        const task = data.update as TaskModel
+
+        // Chamada na API para excluir e adicionar a tarefa
+        await deleteTaskByHelper(request, task.name)
+        await postTask(request, task)
+
+        // Instanciando o page object
+        const tasksPage: TasksPage = new TasksPage(page)
+
+        // Cenário
+        await tasksPage.go()
+        await tasksPage.remove(task.name)
+
+        // Assert
+        await tasksPage.shouldNotExist(task.name)
+
+
+    });
+});
