@@ -77,7 +77,7 @@ test.describe('Atualização', ()=>{
 test.describe('Exclusão', ()=>{
     test('Deve conseguir excluir uma tarefa', async ({ request }) => {
         // Massa de teste
-        const task = data.update as TaskModel
+        const task = data.delete as TaskModel
 
         // Chamada na API para excluir e adicionar a tarefa
         await deleteTaskByHelper(request, task.name)
